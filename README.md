@@ -17,6 +17,7 @@ Stay in relax, stay safe... but watch out the key! If you lost it, you can't rec
 You can try to re-insert a password with an other key, or format the USB stick.
 
 Language supported V0.1: English, Italian
+
 Programming language: Python
 
 
