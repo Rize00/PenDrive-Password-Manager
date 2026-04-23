@@ -16,14 +16,17 @@ For find a password, just search with the key in the box entry and (if you write
 Stay in relax, stay safe... but watch out the key! If you lost it, you can't recover it and I can't recover it (the same application also). You lose all the password inside associated with the key you lose. 
 You can try to re-insert a password with an other key, or format the USB stick.
 
+Language supported V0.1: English, Italian
+Programming language: Python
+
 
 ![GUI](Image/GUI_V0.1.png)
 
 
-Language supported V0.1: English, Italian
-Programming language: Python
 
-Consider to share changes per helping this application growing.
+Consider to share changes per support this application.
+
 Consider a donation if you want to support the developer
-Thank you for reading, 
-  the developer Riccardo Sebastiani
+Thank you for reading, the developer 
+
+Riccardo Sebastiani
