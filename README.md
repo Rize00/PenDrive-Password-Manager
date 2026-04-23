@@ -27,13 +27,18 @@ Programming language: Python
 
 
 
-Consider to share changes per support this application.
-
-Consider a donation if you want to support the developer
+Help me improve this app! Your feedback and suggestions are vital for its growth. If you find my work useful and would like to support its development, please consider making a donation. Every contribution helps me dedicate more time to building new features for you!
 
 Thank you for reading, the developer,
 
 Riccardo Sebastiani
 
 
+
 Support email: infosoftware120@gmail.com
+
+Ethereum address: 0xd76a7ae89b2479c5181A548Dd6315a67Dc37a597
+
+XRP address:  rLNmmcNEizWaygypRVTKaWoZG6RrqfsJpi
+
+Bitcoin address: bc1qv30jcnrfp68dqq2wdfaa74lrzvp0frwvku94ah
