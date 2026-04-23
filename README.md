@@ -18,7 +18,7 @@ You can try to re-insert a password with an other key, or format the USB stick.
 
 Language supported V0.1: English, Italian
 
-Note: The language will change according to the OS language
+Note: The language will change according to OS language
 
 Programming language: Python
 
