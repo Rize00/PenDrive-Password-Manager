@@ -30,6 +30,7 @@ Programming language: Python
 Consider to share changes per support this application.
 
 Consider a donation if you want to support the developer
-Thank you for reading, the developer 
+
+Thank you for reading, the developer,
 
 Riccardo Sebastiani
