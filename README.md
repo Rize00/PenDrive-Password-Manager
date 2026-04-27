@@ -23,7 +23,7 @@ Note: The language will change according to OS language
 Programming language: Python
 
 
-![GUI](Image/GUI_V0.1.png)
+![GUI](Image/GUI_V0_1.png)
 
 
 
