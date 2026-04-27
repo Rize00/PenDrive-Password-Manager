@@ -1,0 +1,268 @@
+<PasswordListBox>:
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: 0.4, 0.6
+        pos_hint: {'x': 0.05 ,'y': 0.1}
+
+        canvas.before:
+            Color:
+                rgba: 0.4, 0.4, 0.4, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+            Color:
+                rgba: 1, 0, 0, 1
+            Line:
+                width: 2
+                rectangle: [*self.pos, *self.size]
+
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+            scroll_overall: False
+            bar_width: '15dp'
+            GridLayout:
+                id: container
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 20
+                padding: 20
+
+
+
+<ReadOnlyBox>:
+    orientation: 'vertical'
+    size_hint: (None, None)
+    pos_hint: {'x': 0.525, 'y': 0.18}
+    width: 500 * self.base_scale
+    height: 250 * self.base_scale
+    padding: [15 * self.base_scale, 10 * self.base_scale, 15 * self.base_scale, 10 * self.base_scale]
+    spacing: 12 * self.base_scale
+
+    canvas.before:
+        Color:
+            rgba: 0.2, 0.2, 0.2, 1
+        Rectangle:
+            pos: self.pos
+            size: (self.width,self.height) #self.size
+        Color:
+            rgba: 1, 1, 1, 1
+        Line:
+            width: 1.1
+            rectangle: (self.x, self.y, self.width, self.height)
+
+    # TITLE
+    Label:
+        id: id_titolo
+        text: "USB Info"
+        size_hint_y: None
+        height: self.texture_size[1]
+        font_size: 40 * root.base_scale
+        halign: 'center'
+        text_size: (self.width - 30 * root.base_scale, None)
+
+    # ROWS
+    Label:
+        id: id_r2
+        text: "Path :"
+        size_hint_y: None
+        height: self.texture_size[1]
+        font_size: 36 * root.base_scale
+        halign: 'left'
+        text_size: (self.width - 30 * root.base_scale, None)
+        shorten: True #Short the string
+        shorten_from: 'right'
+
+    Label:
+        id: id_r3
+        text: "Spazio libero :"
+        size_hint_y: None
+        height: self.texture_size[1]
+        font_size: 32 * root.base_scale
+        halign: 'left'
+        text_size: (self.width - 30 * root.base_scale, None)
+
+    Label:
+        id: id_r4
+        text: "Spazio totale :"
+        size_hint_y: None
+        height: self.texture_size[1]
+        font_size: 32 * root.base_scale
+        halign: 'left'
+        text_size: (self.width - 30 * root.base_scale, None)
+
+    Widget:
+        size_hint_y: 1
+
+<Popup>:
+    title_size: '40sp'
+    title_align: 'center'
+    title_height: '60dp'
+
+
+#:import utils kivy.utils
+#:import MDIcon kivymd.uix.label.MDIcon
+#:import webbrowser webbrowser
+<CustomPopup>:
+    orientation: 'vertical'
+    padding: dp(15)
+    spacing: dp(15)
+    custom_font_size: '14sp' # Valore di default
+    canvas.before:
+        Color:
+            rgba: (1, 0, 0, 1) if root.icon_type == "error usb" else utils.get_color_from_hex(root.bg_hex)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        size_hint_y: 0.7
+        spacing: dp(20)
+        MDIcon:
+            icon: root.Get_icon(root.icon_type)
+            font_size: '150sp'
+            size_hint_x: 0.3
+            theme_text_color: "Custom"
+            text_color: utils.get_color_from_hex(root.text_hex)
+            halign: "center"
+            pos_hint: {'center_y': 0.5} #Position
+
+        Label:
+            text: root.message_text
+            text_size: self.width, None
+            halign: 'left'
+            valign: 'middle'
+            font_name: root.custom_font
+            font_size: root.custom_font_size
+            color: utils.get_color_from_hex(root.text_hex)
+
+    BoxLayout:
+        size_hint_y: 0.3
+        spacing: dp(10)
+        Button:
+            text: "Github"
+            opacity: 1 if root.icon_type == "info" else 0
+            disabled: root.icon_type != "info"
+            on_release: webbrowser.open("https://github.com/Rize00/PenDrive-Password-Manager")
+            background_color: utils.get_color_from_hex('#ae7bff') #Purple
+            size_hint: (root.btn_width, root.btn_height)
+            font_size: root.custom_font_size
+            pos_hint: {'center_y': 0.5} # Centra verticalmente il tasto
+        Button:
+            text: "OK"
+            background_color: utils.get_color_from_hex('#000000')
+            opacity: 1 if root.icon_type != "usb" else 0
+            size_hint: (root.btn_width, root.btn_height)
+            font_size: root.custom_font_size
+            pos_hint: {'center_y': 0.5} # Centra verticalmente il tasto
+            on_release: root.On_ok_pressed() if root.icon_type != "usb" else None
+        Button:
+            text: "License"
+            opacity: 1 if root.icon_type == "info" else 0
+            disabled: root.icon_type != "info"
+            on_release: webbrowser.open("https://github.com/Rize00/PenDrive-Password-Manager/blob/main/LICENSE")
+            background_color: utils.get_color_from_hex('#FFFDD0') #Cream
+            size_hint: (root.btn_width, root.btn_height)
+            font_size: root.custom_font_size
+            pos_hint: {'center_y': 0.5} # Centra verticalmente il tasto
+
+<GUI_option_linux>:
+    canvas.before:
+        Color:
+            rgba: 0.15, 0.15, 0.15, 1  # Sfondo grigio scuro tipico di CTK
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    # --- PASSWORD LIST (Label) ---
+    Label:
+        text: "Password List"
+        font_size: 40
+        bold: True
+        italic: True
+        size_hint: None, None
+        size: 510, 40  # 17 * 30 (list_box_width)
+        pos: 40, 600   # x_canvas, y_canvas
+        color: 1, 1, 1, 1 # Testo bianco (fg_color)
+    PasswordListBox:
+        id:passwordlistbox
+
+    # --- INSERT BOX USERNAME-PASSWORD ---
+    TextInput:
+        id: first_entry
+        hint_text: "Username/Email"
+        multiline: False
+        size_hint: None, None
+        size: 300, 50
+        pos: 750, 650
+        font_size: '30sp'
+        text: ""
+        background_color: 1, 1, 1, 1
+        foreground_color: 0, 0, 0, 1
+    TextInput:
+        id: second_entry
+        hint_text: "Password"
+        multiline: False
+        size_hint: None, None
+        size: 300, 50
+        pos: 750, 570
+        font_size: '30sp'
+        text: ""
+        background_color: 1, 1, 1, 1
+        foreground_color: 0, 0, 0, 1
+
+    # --- KEY CONFIG (Label "Key:") ---
+    Label:
+        text: "Key:"
+        font_size: 50
+        bold: True
+        size_hint: None, None
+        size: 70, 35
+        pos: 50, 735
+    MDTextField:
+        id: key_input
+        max_text_length: 16
+        multiline: False
+        readonly: False
+        size_hint: None, None
+        size: 300, 0
+        pos: 150, 715
+        font_size: '30sp'
+        mode: 'rectangle'
+        password: False
+        password_mask: "#"
+
+        text_color_focus: 0, 0.6, 0.6, 1
+        text_color_normal: 0, 0.6, 0.6, 1
+        line_color_normal: 1, 1, 1, 1
+
+    # --- BUTTONS ---
+    Button:
+        id: btn_set_key
+        text: "Set Key"
+        font_size: 30
+        bold: True
+        size_hint: None, None
+        size: 150, 60
+        pos: 470, 725
+        background_normal: ''
+        background_color: 0, 0.43, 0.86, 1
+        color: 0, 0, 0, 1
+        on_press: root.SetKey()
+
+    Button:
+        id: btn_insert
+        text: "Insert"
+        font_size: 30
+        bold: True
+        size_hint: None, None
+        size: 150, 75  # width_button, width_button / 2
+        pos: 825, 450
+        background_normal: ''
+        background_color: 0, 0.43, 0.86, 1
+        color: 0, 0, 0, 1
+        on_release: root.ReturnEntries()
+
+    ReadOnlyBox:
+        id:usb_information
