@@ -21,6 +21,7 @@ Language supported V0.1: English, Italian
 Note: The language will change according to OS language
 
 Programming language: Python
+Crpyting method: AES
 
 
 ![GUI](Image/GUI_V0_1.png)
