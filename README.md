@@ -31,7 +31,7 @@ Tried on: Ubuntu 25.10, Windows 10 (The .exe file is currently under development
 
 <p align=center>
   
-![GUI](Image/GUI_V0_1.png)
+![GUI](Image/GUI_V0_1_2.png)
 
 </p>
 
