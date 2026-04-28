@@ -21,7 +21,7 @@ Crypting Method: AES
 
 Version: 0.1.2
 
-Tried on: Ubuntu 25.10, Windows 10
+Tried on: Ubuntu 25.10, Windows 10 (The .exe file is currently under development and is not yet ready for release.)
 
 <p align=center>
   
