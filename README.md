@@ -15,7 +15,7 @@ To find your passwords, just use the search bar and then insert the key in the e
 
 Stay safe and relaxed... but be careful! If you lose the key you can't recover it and I can't recover it. You lose all the password associated with the key you lost. You can try to re-insert a password with another key, or format the USB stick.
 
-Languages supported: english, italian (based on OS language)
+Languages supported: english, italian, french, russian (based on OS language)
 Crypting Method: AES
 Version: 0.1.1
 Tried on: Ubuntu 25.10
