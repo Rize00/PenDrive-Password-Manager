@@ -1,3 +1,13 @@
+'''
+Author: Riccardo Sebastiani
+Application Name: PenDrive Password Manager
+Version: 0.1.3
+Copyright © 2026
+
+License: GNU GPL v3 (General Public License)
+
+This module is for addons
+'''
 import sys
 import os
 import global_variable
