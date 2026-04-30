@@ -15,6 +15,8 @@ To find your passwords, just use the search bar and then insert the key in the e
 
 Stay safe and relaxed... but be careful! If you lose the key you can't recover it and I can't recover it. You lose all the password associated with the key you lost. You can try to re-insert a password with another key, or format the USB stick.
 
+Note: Works also with MicroSD cards if you have the MicroSD to USB Adapter
+
 Languages supported: english, italian, french, russian (based on OS language)
 
 Crypting Method: AES
