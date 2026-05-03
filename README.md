@@ -17,7 +17,7 @@ Stay safe and relaxed... but be careful! If you lose the key you can't recover i
 
 Note: Works also with MicroSD cards if you have the MicroSD to USB Adapter
 
-Languages supported: english, italian, french, russian (based on OS language)
+Languages supported: english, italian, french, german, russian (based on OS language)
 
 Crypting Method: AES
 
