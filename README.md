@@ -33,7 +33,7 @@ Tried on: Ubuntu 25.10, Windows 10
 
 <p align=center>
   
-![GUI](Image/GUI_V0_1_2.png)
+![GUI](Image/latest_GUI_interface.png)
 
 </p>
 
