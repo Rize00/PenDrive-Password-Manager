@@ -21,7 +21,7 @@ Languages supported: english, italian, french, russian (based on OS language)
 
 Crypting Method: AES
 
-Version: 0.1.2
+Version: 0.2
 
 Tried on: Ubuntu 25.10, Windows 10
 
