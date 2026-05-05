@@ -21,7 +21,7 @@ import zlib
 def crypt_aes(text):
         try:
                 key = bytes(global_variable.KeyString, 'utf-8') #16, 24 or 32 byte
-                cipher = AES.new(key, AES.MODE_ECB) # Modo semplice per iniziare
+                cipher = AES.new(key, AES.MODE_ECB)
                 y_compressed = zlib.compress(text.encode('utf-8'))
                 y = pad(y_compressed, 16)
                 y = cipher.encrypt(y)
