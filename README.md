@@ -17,11 +17,11 @@ Stay safe and relaxed... but be careful! If you lose the key you can't recover i
 
 Note: Works also with MicroSD cards if you have the MicroSD to USB Adapter
 
-Languages supported: english, italian, french, german, russian (based on OS language)
+Languages supported: english, italian, french, german, russian, spanish (based on OS language)
 
 Crypting Method: AES
 
-Version: 0.2
+Version: 0.2.1
 
 Tried on: Ubuntu 25.10, Windows 10
 
