@@ -33,7 +33,7 @@ Tried on: Ubuntu 25.10, Windows 10
 
 </p>
 
-<p align="left">
+<p align="center">
   <img src="Image/latest_GUI_interface.png" alt="GUI" width="500">
   <img src="Image/latest_GUI_settings.png" alt="GUI" width="500">
 </p>
