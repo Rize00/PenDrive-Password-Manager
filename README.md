@@ -15,6 +15,8 @@ To find your passwords, just use the search bar and then insert the key in the e
 
 Stay safe and relaxed... but be careful! If you lose the key you can't recover it and I can't recover it. You lose all the password associated with the key you lost. You can try to re-insert a password with another key, or format the USB stick.
 
+You can also do a backup of your file, change keys and check the integrity (like if someone changes the main file without the application)
+
 Note: Works also with MicroSD cards if you have the MicroSD to USB Adapter
 
 Languages supported: english, italian, french, german, russian, spanish (based on OS language)
@@ -31,12 +33,10 @@ Tried on: Ubuntu 25.10, Windows 10
 
 </p>
 
-<p align=center>
-  
-![GUI](Image/latest_GUI_interface.png)
-
+<p align="left">
+  <img src="Image/latest_GUI_interface.png" alt="GUI" width="500">
+  <img src="Image/latest_GUI_settings.png" alt="GUI" width="500">
 </p>
-
 
 
 
