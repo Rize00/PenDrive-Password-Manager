@@ -6,13 +6,7 @@ Copyright © 2026
 
 License: GNU GPL v3 (General Public License)
 
-This module is the main interface module. Here, there are classes (Interface, Language) and two functions (Get_language, main). 
-'''
-
-'''
-AGGIUNTE: aggiunto un sort delle password, modificatoi settings: aggiunto parametri e tasti in più. Si creano 2 file: 1 per controllo integrità del file delle password,
-il secondo è per il controllo tramite backup del file delle password. Un altro cambi tutte le chiavi associate. Aggiunto lo spagnolo.
-Fixato un probabile permission denied
+This module is the main interface module.
 '''
 
 
