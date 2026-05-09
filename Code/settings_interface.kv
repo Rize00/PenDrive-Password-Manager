@@ -1,0 +1,171 @@
+#: import CheckBox kivy.uix.checkbox
+#:import Window kivy.core.window.Window
+#:import Language utility_class_and_functions.Language
+
+#-------------- Custom Widget -------------------#
+<LabeledCheckbox@MDBoxLayout>:
+    orientation: "horizontal"
+    size_hint_y: None
+    height: dp(50)
+    spacing: dp(10)
+
+    #New variables
+    text: ""
+    active: False
+    flag_active: checkbox.active
+    label_color: [1,1,1,1]
+    index: 0
+
+    MDCheckbox:
+        id: checkbox
+        active: True
+        size_hint: None, None
+        size: dp(48), dp(48)
+        color: root.label_color
+        color_inactive: root.label_color
+        on_active: app.array_gen_variable[root.index] = self.active
+
+
+    MDLabel:
+        text: root.text
+        font_size: "28sp"
+        theme_text_color: "Custom"  #Change colour
+        text_color: root.label_color
+
+
+
+<SettingsScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        md_bg_color: global_variable.color_bg_interface
+
+        MDTopAppBar:
+            title: Language._("settings name")
+            anchor_title: "left"
+            left_action_items: [["arrow-left", lambda x: app.Back_to_mainscreen()]] #Change screen
+            font_size: "36sp"
+            elevation: 2
+
+        ScrollView:
+            do_scroll_x: False #No x scroll
+            do_scroll_y: True #Yes y scroll
+
+            MDBoxLayout: #ScrollView accept only ONE child
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                padding: dp(20)
+                spacing: dp(20)
+
+                #--------------- First Setting  ------------------#
+                MDLabel:
+                    text: Language._("settings name gen")
+                    id: settings_name_gen
+                    font_size: "36sp"
+                    theme_text_color: "Custom"
+                    text_color: global_variable.color_text_settings
+                    size_hint_y: None
+
+                MDFloatLayout:
+                    size_hint: None, None
+                    size: dp(350), dp(130)
+
+                    MDTextField: #Text input for gen len
+                        id: key_input
+                        max_text_length: 2
+                        multiline: False
+                        readonly: False
+                        size_hint: None, None
+                        size: dp(70), dp(50)
+                        pos: settings_name_gen.x + 100, settings_name_gen.y - 80
+                        font_size: '30sp'
+                        mode: "rectangle"
+                        line_color_normal: 1, 1, 1, 1
+                        text_color_normal: 1, 1, 1, 1
+                        input_filter: 'int'
+                        text: app.lenght_gen_variable
+                        on_text: app.lenght_gen_variabl = abs(int(self.text)) if self.text and self.text not in ("", "-") else 0
+
+                    MDBoxLayout:
+                        orientation: 'horizontal' #Orientation of checkboxes
+                        size_hint: None, None
+                        size: dp(900), dp(170)
+                        spacing: dp(10) #Checkbox spacing
+                        pos: key_input.x + 100, key_input.y + 15
+
+                        LabeledCheckbox:
+                            id: checkbox_uppercase
+                            text: Language._("checkbox uppercase")
+                            index: 0
+                            label_color: global_variable.color_text_settings
+
+                        LabeledCheckbox:
+                            id: checkbox_lowercase
+                            text: Language._("checkbox lowercase")
+                            index: 1
+                            label_color: global_variable.color_text_settings
+
+                        LabeledCheckbox:
+                            id: checkbox_symb
+                            text: Language._("checkbox symb")
+                            index: 2
+                            label_color: global_variable.color_text_settings
+
+                        LabeledCheckbox:
+                            id: checkbox_num
+                            text: Language._("checkbox num")
+                            index: 3
+                            label_color: global_variable.color_text_settings
+
+                    MDSeparator:
+                        size_hint: None,None
+                        width: Window.width
+                        height: dp(1)
+                        pos_hint: {"center_y": 0.3}
+                        color: 0.8,0.8,0.8,1
+                        x: 0
+                #------------------- END First setting--------------------------------------
+                Button:
+                    text: Language._("settings change key label")
+                    text_size: self.size
+                    font_size: "36sp"
+                    theme_text_color: "Custom"
+                    size_hint_y: None
+                    padding: [dp(20), dp(0)]
+                    halign: "left"
+                    valign: "middle"
+                    on_release: app.Go_to_Changekeys()
+                #------------------ END SECOND SETTING ------------------------
+                Button:
+                    text: Language._("settings integrity password label")
+                    text_size: self.size
+                    font_size: "36sp"
+                    theme_text_color: "Custom"
+                    size_hint_y: None
+                    padding: [dp(20), dp(0)]
+                    halign: "left"
+                    valign: "middle"
+                    on_release: root.CheckHash()
+                #------------------ END THIRD SETTING ------------------------
+                Button:
+                    text: Language._("settings do backup label")
+                    text_size: self.size
+                    font_size: "36sp"
+                    theme_text_color: "Custom"
+                    size_hint_y: None
+                    padding: [dp(20), dp(0)]
+                    halign: "left"
+                    valign: "middle"
+                    on_release: root.Backup("to")
+                #------------------ END FOURTH SETTING ------------------------
+                Button:
+                    text: Language._("settings from backup label")
+                    text_size: self.size
+                    font_size: "36sp"
+                    theme_text_color: "Custom"
+                    size_hint_y: None
+                    padding: [dp(20), dp(0)]
+                    halign: "left"
+                    valign: "middle"
+                    on_release: root.Backup("from")
+                #------------------ END FIFTH SETTING ------------------------
