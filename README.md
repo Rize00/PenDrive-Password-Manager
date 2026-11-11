@@ -50,10 +50,4 @@ Riccardo Sebastiani
 
 Support email: infosoftware120@gmail.com
 
-Ethereum address: 0xd76a7ae89b2479c5181A548Dd6315a67Dc37a597
-
-XRP address:  rLNmmcNEizWaygypRVTKaWoZG6RrqfsJpi
-
-Bitcoin address: bc1qv30jcnrfp68dqq2wdfaa74lrzvp0frwvku94ah
-
 [![Download PenDrive-Password-Manager (Linux)](https://img.shields.io/sourceforge/dm/pendrive-password-manager.svg)](https://sourceforge.net/projects/pendrive-password-manager/files/latest/download)
