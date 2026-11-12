@@ -11,7 +11,7 @@ PenDrive Password Manager
 Tired of saving passwords online? Tired of headaches with passwords written on a piece of paper? Try this...
 With just a USB stick as a key, you can store all the password you want. Thanks to the encryption and hidden feature no one will know! Also you can store different sets of passwords with different keys
 
-To find your passwords, just use the search bar and then insert the key in the entry box, then you can copy (select it) or delete it (BACKSPACE).
+To find your passwords, just use the search bar and then insert the key in the entry box, then you can copy (select it) or delete it (Canc button).
 
 Stay safe and relaxed... but be careful! If you lose the key you can't recover it and I can't recover it. You lose all the password associated with the key you lost. You can try to re-insert a password with another key, or format the USB stick.
 
@@ -19,13 +19,13 @@ You can also do a backup of your file, change keys and check the integrity (like
 
 Note: Works also with MicroSD cards if you have the MicroSD to USB Adapter
 
-Languages supported: english, italian, french, german, russian, spanish (based on OS language)
+Languages supported: english, italian, german, russian (based on OS language)
 
 Crypting Method: AES
 
-Version: 0.2.1
+Version: 0.2.2
 
-Tried on: Ubuntu 25.10, Windows 10
+Tried on: Ubuntu 26.04, Ubuntu 25.10, Windows 10
 
 <p align=center>
   
