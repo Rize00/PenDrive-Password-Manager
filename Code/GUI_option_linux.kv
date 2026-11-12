@@ -1,0 +1,294 @@
+#:import Language utility_class_and_functions.Language
+#:import global_variable global_variable
+
+<PasswordListBox>:
+    BoxLayout:
+        id: container
+        orientation: 'vertical'
+        size_hint: 0.4, 0.6
+        pos_hint: {'x': 0.05 ,'y': 0.1}
+
+        canvas.before:
+            Color:
+                rgba: 0.4, 0.4, 0.4, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+            Color:
+                rgba: 1, 0, 0, 1
+            Line:
+                width: dp(2)
+                rectangle: [*self.pos, *self.size]
+
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+            scroll_overall: False
+            bar_width: '15dp'
+            GridLayout:
+                id: container
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(20)
+                padding: dp(20)
+
+<ReadOnlyBox>:
+    orientation: 'vertical'
+
+    size_hint: (0.4, 0.3) 
+    pos_hint: {'x': 0.525, 'y': 0.18}
+
+    padding: [self.width * 0.03, self.height * 0.04]
+    spacing: self.height * 0.05
+
+    canvas.before:
+        Color:
+            rgba: 0.2, 0.2, 0.2, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        Color:
+            rgba: 1, 1, 1, 1
+        Line:
+            width: dp(1.1)
+            rectangle: (self.x, self.y, self.width, self.height)
+
+    # TITLE
+    Label:
+        id: id_titolo
+        text: Language._("usb info")
+        size_hint_y: 0.25
+        font_size: sp(40) * root.base_scale
+        halign: 'center'
+        valign: 'middle'
+        text_size: self.size
+
+    # ROW 1
+    Label:
+        id: id_r2
+        text: Language._("path")
+        size_hint_y: 0.25
+        font_size: sp(36) * root.base_scale
+        halign: 'left'
+        valign: 'middle'
+        text_size: self.size
+        shorten: True
+        shorten_from: 'right'
+
+    # ROW 2
+    Label:
+        id: id_r3
+        text: Language._("info free space")
+        size_hint_y: 0.25
+        font_size: sp(32) * root.base_scale
+        halign: 'left'
+        valign: 'middle'
+        text_size: self.size
+
+    # ROW 3
+    Label:
+        id: id_r4
+        text: Language._("info total space")
+        size_hint_y: 0.25
+        font_size: sp(32) * root.base_scale
+        halign: 'left'
+        valign: 'middle'
+        text_size: self.size
+
+
+<Popup>:
+    title_size: '40sp'
+    title_align: 'center'
+    title_height: '60dp'
+
+
+#:import utils kivy.utils
+#:import MDIcon kivymd.uix.label.MDIcon
+#:import webbrowser webbrowser
+<CustomPopup>:
+    orientation: 'vertical'
+    padding: dp(15)
+    spacing: dp(15)
+    custom_font_size: '14sp' # Valore di default
+    canvas.before:
+        Color:
+            rgba: (1, 0, 0, 1) if root.icon_type == "error usb" else utils.get_color_from_hex(root.bg_hex)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        size_hint_y: 0.7
+        spacing: dp(20)
+        MDIcon:
+            icon: root.Get_icon(root.icon_type)
+            theme_font_size: "Custom"
+            font_size: '150sp'
+            size_hint_x: 0.3
+            theme_text_color: "Custom"
+            text_color: utils.get_color_from_hex(root.text_hex)
+            halign: "center"
+            pos_hint: {'center_y': 0.5} #Position
+
+        Label:
+            text: root.message_text
+            text_size: self.width, None
+            halign: 'left'
+            valign: 'middle'
+            font_name: root.custom_font
+            font_size: root.custom_font_size
+            color: utils.get_color_from_hex(root.text_hex)
+            pos_hint: {'center_y': 0.4}
+
+    BoxLayout:
+        size_hint_y: 0.3
+        spacing: dp(10)
+        Button:
+            text: "Github"
+            opacity: 1 if root.icon_type == "info" else 0
+            disabled: root.icon_type != "info"
+            on_release: webbrowser.open("https://github.com/Rize00/PenDrive-Password-Manager")
+            background_color: utils.get_color_from_hex('#ae7bff') #Purple
+            size_hint: (root.btn_width, root.btn_height)
+            font_size: root.custom_font_size
+            pos_hint: {'center_y': 0.35}
+        Button:
+            text: "OK"
+            background_color: utils.get_color_from_hex('#000000')
+            opacity: 1 if root.icon_type != "usb error" else 0
+            auto_dismiss: True if root.icon_type != "usb error" else 0
+            size_hint: (root.btn_width, root.btn_height)
+            font_size: root.custom_font_size
+            pos_hint: {'center_y': 0.35}
+            on_release: root.On_ok_pressed() if root.icon_type != "usb" else None
+        Button:
+            text: "License"
+            opacity: 1 if root.icon_type == "info" else 0
+            disabled: root.icon_type != "info"
+            on_release: webbrowser.open("https://github.com/Rize00/PenDrive-Password-Manager/blob/main/LICENSE")
+            background_color: utils.get_color_from_hex('#FFFDD0') #Cream
+            size_hint: (root.btn_width, root.btn_height)
+            font_size: root.custom_font_size
+            pos_hint: {'center_y': 0.35}
+
+#:import global_variable global_variable
+<GUI_option_linux>
+    canvas.before:
+        Color:
+            rgba: global_variable.color_bg_interface
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    # --- PASSWORD LIST (Label) ---
+    Label:
+        text: Language._("password list")
+        font_size: '40sp'
+        bold: True
+        italic: True
+        size_hint: None, None
+        size: dp(510), dp(40)
+        pos_hint: {"x": 0.045, "y": 0.73 }    # x_canvas, y_canvas
+        color: 1, 1, 1, 1
+    PasswordListBox:
+        id:passwordlistbox
+
+    # --- INSERT BOX USERNAME-PASSWORD ---
+    TextInput:
+        id: first_entry
+        hint_text: "Username/Email"
+        multiline: False
+        size_hint: None, None
+        size: dp(300), dp(50)
+        pos_hint: {"x": .6 , "y": 0.77}
+        font_size: '30sp'
+        text: ""
+        background_color: 1, 1, 1, 1
+        foreground_color: 0, 0, 0, 1
+    TextInput:
+        id: second_entry
+        hint_text: "Password"
+        multiline: False
+        size_hint: None, None
+        size: dp(300), dp(50)
+        pos_hint: {"x": .6, "y": .68}
+        font_size: '30sp'
+        text: ""
+        background_color: 1, 1, 1, 1
+        foreground_color: 0, 0, 0, 1
+
+    # --- KEY CONFIG (Label "Key:") ---
+    Label:
+        text: Language._("key")
+        font_size: '50sp'
+        bold: True
+        size_hint: None, None
+        size: dp(70), dp(35)
+        pos_hint: {"x": 0.05 , "y": 0.89}
+    MDTextField:
+        id: key_input
+        multiline: False
+        readonly: False
+        size_hint_x: None
+        width: dp(300)
+        pos_hint: {"x": 0.15, "y": 0.87}
+        font_size: '30sp'
+        mode: 'outlined'
+        password: False
+        password_mask: "#"
+
+        theme_line_color: "Custom"
+        line_color_normal: global_variable.border_defaultcolor_textinput #Border of text box default
+        line_color_focus: global_variable.border_linecolorfocus_maxtext_input if len(self.text) == 16 else global_variable.border_linecolorfocus_text_input #Border color on writing
+
+        on_text: if len(self.text) > 16: self.text = self.text[:16]
+        MDTextFieldMaxLengthText:
+            max_text_length: 16
+            theme_font_size: "Custom"
+            font_size: "18sp"
+            padding: [0, 0, 0, "20dp"]
+	    
+    # --- BUTTONS ---
+    Button:
+        id: btn_set_key
+        text: "Set Key"
+        font_size: '30sp'
+        bold: True
+        size_hint: None, None
+        size: dp(150), dp(60)
+        pos_hint: {"x": 0.43, "y": 0.87}
+        background_normal: ''
+        background_color: 0, 0.43, 0.86, 1
+        color: 0, 0, 0, 1
+        on_press: root.SetKey()
+
+    Button:
+        id: btn_insert
+        text: "Insert"
+        font_size: '30sp'
+        bold: True
+        size_hint: None, None
+        size: dp(150), dp(75)  # width_button, width_button / 2
+        pos_hint: {"x": 0.58, "y": 0.55}
+        background_normal: ''
+        background_color: 0, 0.43, 0.86, 1
+        color: 0, 0, 0, 1
+        on_release: root.ReturnEntries()
+
+    Button:
+        id: btn_generate
+        text: "Gen"
+        font_size: '30sp'
+        bold: True
+        size_hint: None, None
+        size: dp(150), dp(75)  # width_button, width_button / 2
+        pos_hint: {"x": 0.75, "y": 0.55}
+        background_normal: ''
+        background_color: 0, 0.43, 0.86, 1
+        color: 0, 0, 0, 1
+        on_release: root.GeneratePassword()
+
+
+    ReadOnlyBox:
+        id:usb_information

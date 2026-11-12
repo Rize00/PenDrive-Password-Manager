@@ -1,0 +1,339 @@
+#:import CheckBox kivy.uix.checkbox
+#:import Window kivy.core.window.Window
+#:import Language utility_class_and_functions.Language
+#:import ScrollEffect kivy.effects.scroll.ScrollEffect
+
+#-------------- Custom Widget -------------------#
+#root.pos is respect to main widget
+
+<GenOptionLenButton@MDRelativeLayout>:
+    size_hint_y: None
+    height: dp(170)
+    size_hint_x: 1
+
+    MDLabel:
+        id: settings_name_gen
+        text: Language._("settings name gen")
+        theme_font_size: "Custom"
+        font_size: dp(36)
+        theme_text_color: "Custom"
+        text_color: global_variable.color_text_settings
+        size_hint: None, None
+        size: dp(700), dp(50)
+        pos: 0, dp(110)
+
+    MDTextField:
+        id: key_input
+        max_text_length: 2
+        multiline: False
+        size_hint: None, None
+        size: dp(70), dp(50)
+        pos: dp(150), dp(10)
+        font_size: '30sp'
+        mode: "outlined"
+        line_color_normal: 1, 1, 1, 1
+        text_color_normal: 1, 1, 1, 1
+        input_filter: 'int'
+        text: app.lenght_gen_variable
+        on_text: app.lenght_gen_variabl = abs(int(self.text)) if self.text and self.text not in ("", "-") else 0
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        size_hint: None, None
+        size: dp(800), dp(100)
+        spacing: dp(10)
+        pos: dp(250), dp(10)
+
+        LabeledCheckbox:
+            id: checkbox_uppercase
+            text: Language._("checkbox uppercase")
+            index: 0
+            label_color: global_variable.color_text_settings
+
+        LabeledCheckbox:
+            id: checkbox_lowercase
+            text: Language._("checkbox lowercase")
+            index: 1
+            label_color: global_variable.color_text_settings
+
+        LabeledCheckbox:
+            id: checkbox_symb
+            text: Language._("checkbox symb")
+            index: 2
+            label_color: global_variable.color_text_settings
+
+        LabeledCheckbox:
+            id: checkbox_num
+            text: Language._("checkbox num")
+            index: 3
+            label_color: global_variable.color_text_settings
+
+<LabeledCheckbox@MDBoxLayout>:
+    orientation: "horizontal"
+    size_hint_y: None
+    height: dp(50)
+    spacing: dp(10)
+
+    #New variables
+    text: ""
+    active: False
+    flag_active: checkbox.active
+    label_color: [1,1,1,1]
+    index: 0
+
+    MDCheckbox:
+        id: checkbox
+        active: True
+        size_hint: None, None
+        size: dp(40), dp(40)
+        theme_font_size: "Custom"
+        font_size: dp(48)
+        pos_hint: {"center_y": 0.5}
+        color: root.label_color
+        color_inactive: root.label_color
+        on_active: app.array_gen_variable[root.index] = self.active
+
+    MDLabel:
+        text: root.text
+        theme_font_size: "Custom"
+        font_size: dp(28)
+        theme_text_color: "Custom"  #Change colour
+        text_color: root.label_color
+
+<BackupButtons@MDRelativeLayout>:
+    size_hint_y: None
+    height: dp(120)
+
+    Label:
+        text: Language._("desktop backup")
+        size_hint: None, None
+        size: self.texture_size
+        font_size: "36sp"
+        id: label
+        pos: dp(0), dp(30)
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        size_hint: None, None
+        size: dp(400), dp(50)
+        pos: dp(450), label.y
+        spacing: dp(10)
+
+        CheckBox:
+            group: "backup_group"
+            size_hint: None, None
+            size: dp(48), dp(48)
+            allow_no_selection: False
+            id: to_button
+            name: "tobackup_button"
+            active: True
+            on_press: app.root.get_screen("settings").RadioPress(self, self.active)
+        Label:
+            text: Language._("choose1 desktop backup")
+            font_size: "28sp"
+            size_hint_x: None
+            width: dp(100)
+
+        CheckBox:
+            group: "backup_group"
+            size_hint: None, None
+            allow_no_selection: False
+            size: dp(48), dp(48)
+            id: from_button
+            name: "frombackup_button"
+            on_press: app.root.get_screen("settings").RadioPress(self, self.active)
+        Label:
+            text: Language._("choose2 desktop backup")
+            font_size: "28sp"
+            size_hint_x: None
+            width: dp(100)
+
+    Button:
+        text: Language._("do desktop backup")
+        size_hint: (None, None)
+        size: ("80dp", "40dp")
+        font_size: "36sp"
+        width: dp(200)
+        pos: dp(900), label.y
+        on_release: app.root.get_screen("settings").Backup(to_button.active,from_button.active)
+
+<QRButtons@MDRelativeLayout>:
+    size_hint_y: None
+    height: dp(200)
+
+    Label:
+        text: Language._("qr image")
+        size_hint: None, None
+        size: self.texture_size
+        font_size: "36sp"
+        id: label_qr
+        pos: dp(0), dp(170)
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        size_hint: None, None
+        size: dp(400), dp(50)
+        pos: dp(450), label_qr.y
+        spacing: dp(10)
+
+        CheckBox:
+            group: "qr_group"
+            allow_no_selection: False
+            size_hint: None, None
+            size: dp(48), dp(48)
+            id: to_button_qr
+            name: "toqr_button"
+            active: True
+            on_press: app.root.get_screen("settings").RadioPress(self, self.active)
+        Label:
+            text: Language._("choose1 qr image")
+            font_size: "28sp"
+            size_hint_x: None
+            width: dp(100)
+
+        CheckBox:
+            group: "qr_group"
+            allow_no_selection: False
+            size_hint: None, None
+            size: dp(48), dp(48)
+            id: from_button_qr
+            name: "fromqr_button"
+            on_press: app.root.get_screen("settings").RadioPress(self, self.active)
+        Label:
+            text: Language._("choose2 qr image")
+            font_size: "28sp"
+            size_hint_x: None
+            width: dp(100)
+
+    MDTextField:
+        id: fernet_key
+        multiline: False
+        size_hint: None, None
+        size: dp(400), dp(50)
+        pos: to_button_qr.x, to_button_qr.y - 90
+        font_size: '30sp'
+        mode: "outlined"
+        line_color_normal: 1, 1, 1, 1
+        text_color_normal: 1, 1, 1, 1
+        hint_text: "Fernet key"
+        hint_text_color_normal: 1,1,1,1
+        MDTextFieldHintText:
+            text: "Chiave di Fernet"
+            theme_font_size: "Custom"
+            font_size: dp(36)
+
+    Button:
+        text: Language._("do qr image")
+        size_hint: (None, None)
+        size: ("80dp", "40dp")
+        font_size: "36sp"
+        width: dp(200)
+        pos: dp(900), to_button_qr.y
+        on_release: app.root.get_screen("settings").QR(to_button_qr.active,from_button_qr.active)
+
+<ChangeKeyScreen@MDRelativeLayout>:
+    size_hint_y: None
+    height: dp(80)
+    Button:
+        text: Language._("settings change key label")
+        text_size: self.size
+        font_size: "36sp"
+        size_hint: 1, 1
+        pos: 0, 60
+        padding: [dp(20), dp(0)]
+        halign: "left"
+        valign: "middle"
+        on_release: app.Go_to_Changekeys()
+
+<CheckIntegrityButton@MDRelativeLayout>:
+    size_hint_y: None
+    height: dp(80)
+    
+    Button:
+        id: cintegritunbutton
+        text: Language._("settings integrity password label")
+        text_size: self.size
+        font_size: "36sp"
+        size_hint: 1, 1
+        pos: 0, 40
+        padding: [dp(20), dp(0)]
+        halign: "left"
+        valign: "middle"
+        on_release: app.root.get_screen("settings").CheckHash()
+
+<CSV@MDRelativeLayout>:
+    size_hint_y: None
+    height: dp(80)
+    
+    Button:
+        id: csv_settings
+        text: "CSV"
+        text_size: self.size
+        font_size: "36sp"
+        size_hint: 1, 1
+        pos: 0, 20
+        padding: [dp(20), dp(0)]
+        halign: "left"
+        valign: "middle"
+        on_release: app.Go_to_CSV()
+
+
+
+<SettingsScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        md_bg_color: global_variable.color_bg_interface
+
+        MDTopAppBar:
+            type: "small"
+            anchor_title: "left"
+            elevation: 2
+            theme_bg_color: "Custom"
+            md_bd_color: "black"
+
+            MDTopAppBarLeadingButtonContainer:
+                MDActionTopAppBarButton:
+                    icon: "arrow-left"
+                    on_release: app.Back_to_mainscreen()
+                    theme_text_color: "Custom"
+                    text_color: global_variable.color_menu_voice
+
+            MDTopAppBarTitle:
+                text: Language._("settings name")
+                theme_font_size: "Custom"
+                theme_text_color: "Custom"
+                font_size: "36sp"
+                text_color: global_variable.color_menu_voice
+                
+
+
+        ScrollView:
+            do_scroll_x: False #No x scroll
+            do_scroll_y: True #Yes y scroll
+            effect_cls: ScrollEffect 
+
+            MDBoxLayout: #ScrollView accept only ONE child
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                padding: dp(20)
+                spacing: dp(10)
+
+                GenOptionLenButton:
+                    id: gen
+
+                BackupButtons:
+                    id: backup_radio
+
+                QRButtons:
+                    id: qr_radio
+
+                ChangeKeyScreen:
+                    id: ckeyscreen
+
+                CheckIntegrityButton:
+                    id: cintegritunbutton
+
+                CSV:
+                    id: csv_settings
+

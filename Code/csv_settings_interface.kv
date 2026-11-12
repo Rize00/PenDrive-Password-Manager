@@ -1,0 +1,223 @@
+#:import Language utility_class_and_functions.Language
+#:import global_variable global_variable
+<CSVButtons@FloatLayout>:
+    size_hint: 0.4, 0.3
+    pos_hint: {'x': 0.05 ,'y': 0.4}
+
+    Label:
+        text: Language._("csv option label")
+        size_hint: None, None
+        size: self.texture_size
+        font_size: "36sp"
+        id: label
+        pos: root.x, root.top - root.height #Respect to father
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        size_hint: None, None
+        size: dp(400), dp(50)
+        pos: label.right + dp(60), label.y + (label.height - self.height) / 2
+        spacing: dp(10)
+
+        CheckBox:
+            group: "csv_group"
+            allow_no_selection: False
+            size_hint: None, None
+            size: dp(48), dp(48)
+            id: to_button
+            name: "to_button"
+            active: True
+            on_press: app.root.get_screen("settings_csv").RadioPress(self, self.active)
+        Label:
+            text: Language._("csv option1")
+            font_size: "28sp"
+            size_hint_x: None
+            width: dp(100)
+
+        CheckBox:
+            group: "csv_group"
+            allow_no_selection: False
+            size_hint: None, None
+            size: dp(48), dp(48)
+            id: send_button
+            name: "send_button"
+            on_press: app.root.get_screen("settings_csv").RadioPress(self, self.active)
+        Label:
+            text: Language._("csv option2")
+            font_size: "28sp"
+            size_hint_x: None
+            width: dp(100)
+
+        CheckBox:
+            group: "csv_group"
+            allow_no_selection: False
+            size_hint: None, None
+            size: dp(48), dp(48)
+            id: from_button
+            name: "from_button"
+            on_press: app.root.get_screen("settings_csv").RadioPress(self, self.active)
+        Label:
+            text: Language._("csv option3")
+            font_size: "28sp"
+            size_hint_x: None
+            width: dp(100)
+
+<CSV_textinput@MDRelativeLayout>:
+    size_hint: 0.6, 0.2
+    pos_hint: {'x': 0.05, 'y': 0.4}
+
+    Label:
+        id: cvstextinput_label_prompt
+        text: Language._("csv prompt option")
+        font_size: "32sp"
+        size_hint: None, None
+        pos: root.x, (root.height - self.height) / 2
+
+    Label:
+        id: cvstextinput_label
+        text: Language._("csv list all keys text")
+        font_size: "32sp"
+        size_hint: None, None
+        pos: cvstextinput_label_prompt.x, cvstextinput_label_prompt.y - dp(60)
+
+    MDTextField:
+        id: csvtextinput
+        multiline: False
+        mode: "outlined"
+        font_size: "32sp"
+
+        size_hint: None, None
+        width: dp(300)
+        height: dp(52)
+        pos: cvstextinput_label.right + dp(250), cvstextinput_label.y + dp(24)
+
+        theme_line_color: "Custom"
+        line_color_normal: global_variable.border_defaultcolor_textinput #Border of text box default
+        #line_color_focus: global_variable.border_linecolorfocus_text_input #Border color on writing
+        line_color_focus: global_variable.border_linecolorfocus_maxtext_input if len(self.text) == 16 or len(self.text)==17 else global_variable.border_linecolorfocus_text_input #Border color on writing
+        MDTextFieldHelperText:
+            text: "Char: " + str(len(csvtextinput.text))
+            mode: "persistent"
+            theme_font_size: "Custom"
+            font_size: "18sp"
+            pos_hint: {"right": 1}
+            padding: [0, 0, 0, "-5dp"]
+
+    Button:
+        text: Language._("csv insert button text")
+        font_size: "32sp"
+        size_hint: None, None
+        size: dp(180), dp(52)
+        x: csvtextinput.right + dp(45)
+        y: csvtextinput.y + dp(0)
+        on_release: app.root.get_screen("settings_csv").InsertKey()
+
+<CSVallkeysListBox@FloatLayout>:
+    #---------- Variables ------------------
+    size_hint: 0.2, 0.3
+    pos_hint: {'center_x': 0.05 ,'center_y': 0.1}
+
+    canvas.before:
+        Color:
+            rgba: 0.4, 0.4, 0.4, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        Color:
+            rgba: 1, 0, 0, 1
+        Line:
+            width: dp(2)
+            rectangle: (self.x, self.y, self.width, self.height)
+
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: True
+        scroll_overall: False
+        bar_width: '15dp'
+        size_hint: 1, 1
+        pos_hint: {'x': 0, 'y': 0}
+
+        GridLayout:
+            id: container_csv
+            cols: 1
+            size_hint_y: None
+            height: self.minimum_height
+            spacing: dp(20)
+            padding: dp(20)
+
+<CSV_notelabel@FloatLayout>:
+    size_hint: 0,0
+    pos_hint: 0,0
+    font_size: "0sp"
+
+    Label:
+        text: Language._("csv restore text info")
+        pos: root.pos
+        font_size: root.font_size
+
+<CSV_okbutton@MDRelativeLayout>:
+    pos_hint: {'x': 0.05 ,'y': 0.4}
+    size_hint: 0.4, 0.3
+    height: dp(40)
+
+    Button:
+        text: Language._("csv do file")
+        size: self.size
+        font_size: "36sp"
+        width: dp(200)
+        pos: self.pos
+        on_release: app.root.get_screen("settings_csv").Process_csv()
+
+
+<CSV_settings>:
+    MDFloatLayout:
+        orientation: 'vertical'
+        md_bg_color: global_variable.color_bg_interface
+
+        MDTopAppBar:
+            type: "small"
+            anchor_title: "left"
+            elevation: 2
+            theme_bg_color: "Custom"
+            md_bd_color: "black"
+            size_hint_x: 1
+            pos_hint: {"top": 1}
+
+            MDTopAppBarLeadingButtonContainer:
+                MDActionTopAppBarButton:
+                    icon: "arrow-left"
+                    on_release: app.Back_to_settings()
+                    theme_text_color: "Custom"
+                    text_color: global_variable.color_menu_voice
+
+            MDTopAppBarTitle:
+                text: Language._("csv topbar name")
+                theme_font_size: "Custom"
+                font_size: "36sp"
+                theme_text_color: "Custom"
+                text_color: global_variable.color_menu_voice
+
+        CSVButtons:
+            id: csv_button_radio
+            size_hint: 0.4, 0.5
+            pos_hint: {'x': 0.05, 'y': 0.82}
+
+        CSV_textinput:
+            id: csv_textinput
+            size_hint: 0.6, 0.3
+            pos_hint: {'x': 0.08, 'y': 0.6}
+
+        CSVallkeysListBox:
+            id: csv_allkeyslistbox
+            size_hint: 0.9, 0.3
+            pos_hint: {'x': 0.05, 'y': 0.3}
+
+        CSV_okbutton:
+            id: csv_okbutton
+            size_hint: 0.3, 0.1
+            pos_hint: {'x': 0.35, 'y': 0.05}
+
+        CSV_notelabel:
+            id: csvnotelabel
+            font_size: "32sp"
+            pos_hint: {'x': 0.5, 'y': 0.22}

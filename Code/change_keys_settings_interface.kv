@@ -1,0 +1,144 @@
+#:import Language utility_class_and_functions.Language
+#:import global_variable global_variable
+<KeysListBox>:
+    orientation: 'vertical'
+    size_hint: 0.4, 0.6
+    pos_hint: {'x': 0.05 ,'y': 0.05}
+
+    canvas.before:
+        Color:
+            rgba: 0.4, 0.4, 0.4, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        Color:
+            rgba: 1, 0, 0, 1
+        Line:
+            width: dp(2)
+            rectangle: [*self.pos, *self.size]
+
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: True
+        scroll_overall: False
+        bar_width: '15dp'
+        GridLayout:
+            id: container
+            cols: 1
+            size_hint_y: None
+            height: self.minimum_height
+            spacing: dp(20)
+            padding: dp(20)
+
+
+<ChangeKey>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        md_bg_color: global_variable.color_bg_interface
+
+        MDTopAppBar:
+            type: "small"
+            anchor_title: "left"
+            elevation: 2
+            theme_bg_color: "Custom"
+            md_bd_color: "black"
+
+            MDTopAppBarLeadingButtonContainer:
+                MDActionTopAppBarButton:
+                    icon: "arrow-left"
+                    on_release: app.Back_to_settings()
+                    theme_text_color: "Custom"
+                    text_color: global_variable.color_menu_voice
+
+            MDTopAppBarTitle:
+                text: Language._("key settings")
+                theme_font_size: "Custom"
+                font_size: "36sp"
+                theme_text_color: "Custom"
+                text_color: global_variable.color_menu_voice
+
+        MDFloatLayout:
+            orientation: 'vertical'
+            MDLabel:
+                id: presentation_label
+                text: Language._("key settings label")
+                halign: "left"
+                color: 1,1,1
+                theme_font_size: "Custom"
+                font_size: "30sp"
+                padding: "30sp"
+                pos: dp(0), dp(240)
+
+            KeysListBox:
+                id: keyslistbox
+
+            MDTextField:
+                id: old_key_input
+                max_text_length: 16
+                multiline: False
+                readonly: False
+                size_hint_x: None
+                width: dp(300)
+                pos: presentation_label.x + dp(550), presentation_label.y + dp(100)
+                font_size: '30sp'
+                mode: 'outlined'
+
+                theme_line_color: "Custom"
+                line_color_normal: global_variable.border_defaultcolor_textinput #Border of text box default
+                line_color_focus: global_variable.border_linecolorfocus_maxtext_input if len(self.text) == 16 else global_variable.border_linecolorfocus_text_input #Border color on writing
+                on_text: if len(self.text) > 16: self.text = self.text[:16]
+                MDTextFieldMaxLengthText:
+                    max_text_length: 16
+                    theme_font_size: "Custom"
+                    font_size: "18sp"
+                    padding: [0, 0, 0, "20dp"]
+                MDTextFieldHintText:
+                    text: Language._("change key settings old key")
+                    theme_font_size: "Custom"
+                    font_size: "24sp"
+
+            MDTextField:
+                id: new_key_input
+                max_text_length: 16
+                multiline: False
+                readonly: False
+                size_hint_x: None
+                width: dp(300)
+                pos: old_key_input.x, presentation_label.y - 20
+                font_size: '30sp'
+                mode: 'outlined'
+                theme_line_color: "Custom"
+                line_color_normal: global_variable.border_defaultcolor_textinput #Border of text box default
+                line_color_focus: global_variable.border_linecolorfocus_maxtext_input if len(self.text) == 16 else global_variable.border_linecolorfocus_text_input #Border color on writing
+                on_text: if len(self.text) > 16: self.text = self.text[:16]
+                MDTextFieldHintText:
+                    text: Language._("change key settings new key")
+                    theme_font_size: "Custom"
+                    font_size: "24sp"
+                MDTextFieldMaxLengthText:
+                    max_text_length: 16
+                    theme_font_size: "Custom"
+                    font_size: "18sp"
+                    padding: [0, 0, 0, "20dp"]
+
+            Button:
+                id: insert_old_key
+                text: Language._("change key settings button insert")
+                opacity: 1
+                size_hint: None, None #Percentual dimensions
+                size: dp(100), dp(70) #Real dimensions
+                font_size: "36sp"
+                width: "200sp"
+                pos: old_key_input.x + dp(350), old_key_input.y + dp(-5)
+                on_release: root.Insert_old()
+
+            Button:
+                id: insert_new_key
+                text: Language._("change key settings button change")
+                opacity: 1
+                size_hint: None, None #Percentual dimensions
+                size: dp(100), dp(70) #Real dimensions
+                font_size: "36sp"
+                width: "200sp"
+                pos: new_key_input.x + dp(350), new_key_input.y + dp(-5)
+                on_release: root.Insert_new()
